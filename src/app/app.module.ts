@@ -1,3 +1,6 @@
+import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,6 +17,15 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+import { AngularFireModule } from '@angular/fire';
+
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthGaurdService } from './auth-gaurd.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -32,9 +44,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase,'oshop'),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AngularFirestore ,AuthService,AuthGaurdService, UserService, AdminAuthGaurdService],
   bootstrap: [AppComponent],
   exports: [BsNavbarComponent, HomeComponent, ProductsComponent, ShoppingCartComponent, CheckOutComponent, OrderSuccessComponent]
 })

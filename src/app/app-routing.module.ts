@@ -1,3 +1,5 @@
+import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
+import { AuthGaurdService } from './auth-gaurd.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
@@ -13,14 +15,16 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
+  {path:'login',component:LoginComponent},
   {path:'products',component:ProductsComponent},
   {path:'shopping-cart', component:ShoppingCartComponent},
-  {path:'check-out',component:CheckOutComponent},
-  {path:'order-success', component:OrderSuccessComponent},
-  {path:'login',component:LoginComponent},
-  {path:'my/orders',component:MyOrdersComponent},
-  {path:'admin/products',component:AdminProductsComponent},
-  {path:'admin/orders',component:AdminOrdersComponent}
+
+  {path:'check-out',component:CheckOutComponent, canActivate:[AuthGaurdService]},
+  {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGaurdService]},
+  {path:'my/orders',component:MyOrdersComponent, canActivate:[AuthGaurdService]},
+
+  {path:'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService]},
+  {path:'admin/orders',component:AdminOrdersComponent, canActivate:[AuthGaurdService]}
 
 ];
 
