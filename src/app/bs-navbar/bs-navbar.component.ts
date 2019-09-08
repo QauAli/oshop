@@ -13,17 +13,9 @@ import { Observable } from 'rxjs';
 })
 export class BsNavbarComponent {
 
-  //user:firebase.User;
-
-  appUser$:Observable<any>;
- 
-
-  constructor(public authService:AuthService, private userService:UserService) { 
-    authService.user$.subscribe(user=>{
-      this.appUser$ = userService.get(user.uid);
-    })
-    
+  constructor(public authService:AuthService, private userService:UserService) {   
   }
+
   logout(){
     this.authService.logout();
 

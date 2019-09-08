@@ -1,4 +1,4 @@
-import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
+import { AdminGuard } from './admin.guard';
 import { AuthGaurdService } from './auth-gaurd.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
@@ -23,8 +23,8 @@ const routes: Routes = [
   {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGaurdService]},
   {path:'my/orders',component:MyOrdersComponent, canActivate:[AuthGaurdService]},
 
-  {path:'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService]},
-  {path:'admin/orders',component:AdminOrdersComponent, canActivate:[AuthGaurdService]}
+  {path:'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService, AdminGuard]},
+  {path:'admin/orders',component:AdminOrdersComponent, canActivate:[AuthGaurdService, AdminGuard]}
 
 ];
 

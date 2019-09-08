@@ -1,4 +1,3 @@
-import { AdminAuthGaurdService } from './admin-auth-gaurd.service';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,7 +16,6 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 
 import { AngularFireModule } from '@angular/fire';
 
@@ -49,7 +47,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     AngularFireDatabaseModule,
     AppRoutingModule
   ],
-  providers: [AngularFirestore ,AuthService,AuthGaurdService, UserService, AdminAuthGaurdService],
+  providers: [AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],
   exports: [BsNavbarComponent, HomeComponent, ProductsComponent, ShoppingCartComponent, CheckOutComponent, OrderSuccessComponent]
 })
