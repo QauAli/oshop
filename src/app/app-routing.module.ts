@@ -1,3 +1,4 @@
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { AdminGuard } from './admin.guard';
 import { AuthGaurdService } from './auth-gaurd.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path:'my/orders',component:MyOrdersComponent, canActivate:[AuthGaurdService]},
 
   {path:'admin/products',component:AdminProductsComponent, canActivate:[AuthGaurdService, AdminGuard]},
-  {path:'admin/orders',component:AdminOrdersComponent, canActivate:[AuthGaurdService, AdminGuard]}
+  {path:'admin/orders',component:AdminOrdersComponent, canActivate:[AuthGaurdService, AdminGuard]},
+  {path:'admin/products/new',component:ProductFormComponent, canActivate:[AuthGaurdService, AdminGuard]}
 
 ];
 

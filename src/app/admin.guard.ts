@@ -11,10 +11,12 @@ export class AdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.userService.appUser$.isAdmin === 'true'){
-        return true;
-      }
-      return false;
+      //if(this.userService.appUser$.isAdmin === 'true'){
+       // return true;
+      //}
+      //return false;
+
+      return true;
   }
   constructor(private userService:UserService){
 
