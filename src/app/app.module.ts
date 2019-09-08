@@ -28,6 +28,7 @@ import { AuthGaurdService } from './auth-gaurd.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { FormsModule } from '@angular/forms';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],

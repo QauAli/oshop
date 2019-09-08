@@ -16,4 +16,12 @@ export class ProductService {
     return this.db.list('/products').push(product);
 
   }
+
+  getProducts(){
+    return this.db.list('/products').snapshotChanges();
+  }
+
+  getProduct(id){
+    return this.db.object('/products/'+id).snapshotChanges();
+  }
 }
