@@ -11,34 +11,34 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private db: AngularFirestore) {
+  // constructor(private db: AngularFirestore) {
 
-  }
-  save(user: firebase.User) {
-    this.db.collection('users').doc(user.uid).set({
-      name: user.displayName,
-      email: user.email
-    });
-  }
+  // }
+  // save(user: firebase.User) {
+  //   this.db.collection('users').doc(user.uid).set({
+  //     name: user.displayName,
+  //     email: user.email
+  //   });
+  // }
 
-  get(uid: string){
-    //return this.db.collection('users').doc(uid).get().subscribe(user=>console.log(user.data()));
-    return this.db.collection('users').doc(uid).get().pipe(map(user=>user.data()));
-  }
+  // get(uid: string){
+  //   //return this.db.collection('users').doc(uid).get().subscribe(user=>console.log(user.data()));
+  //   return this.db.collection('users').doc(uid).get().pipe(map(user=>user.data()));
+  // }
 
-  // constructor(private db:AngularFireDatabase) {
+  constructor(private db:AngularFireDatabase) {
 
-  //  }
+   }
 
-  //  save(user:firebase.User){
-  //    this.db.object('/users/' + user.uid).update({
-  //      name:user.displayName,
-  //      email:user.email
-  //      }
-  //    );
-  //  }
+   save(user:firebase.User){
+     this.db.object('/users/' + user.uid).update({
+       name:user.displayName,
+       email:user.email
+       }
+     );
+   }
 
-  //  get(uid:string){
-  //    return this.db.object('/users/'+uid);
-  //  }
+   get(uid:string){
+     return this.db.object('/users/'+uid).snapshotChanges();
+   }
 }
