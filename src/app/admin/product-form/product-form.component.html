@@ -5,7 +5,7 @@
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input required #title="ngModel" [(ngModel)]="product.payload.val().title" name="title" id="title" type="text" class="form-control">
+                        <input required #title="ngModel" [(ngModel)]="product.title" name="title" id="title" type="text" class="form-control">
                         <div class="alert alert-danger" *ngIf="title.touched && title.invalid"> Title required! </div>
                     </div>
                 
@@ -17,7 +17,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Price</span>
                             </div>
-                            <input [min]="0" #price="ngModel" required id="price" [(ngModel)]="product.payload.val().price" name="price" type="number" class="form-control">
+                            <input [min]="0" #price="ngModel" required id="price" [(ngModel)]="product.price" name="price" type="number" class="form-control">
                         </div>
                         <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
                                 <div  *ngIf="price.errors.min">Min is 0</div>
@@ -28,7 +28,7 @@
                 
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select #category="ngModel" required [(ngModel)]="product.payload.val().category" name="category" id="category" type="number" class="form-control">
+                        <select #category="ngModel" required [(ngModel)]="product.category" name="category" id="category" type="number" class="form-control">
                             <option value=""></option>
                             <option *ngFor="let c of categories$ | async" [value]="c.key">{{c.payload.val().name}}</option>
                         </select>
@@ -37,7 +37,7 @@
                 
                     <div class="form-group">
                         <label for="imageUrl">Image Url</label>
-                        <input url #imageUrl="ngModel" required [(ngModel)]="product.payload.val().imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
+                        <input url #imageUrl="ngModel" required [(ngModel)]="product.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
                         <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
                                 <div  *ngIf="imageUrl.errors.url">Invalid url</div>
                                 <div  *ngIf="imageUrl.errors.required">Price is required!</div>
@@ -45,15 +45,16 @@
                     </div>
                 
                     <button class="btn btn-primary">Submit</button>
+                    <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
                 
                 </form>
     </div>
     <div class="col-md-6">
-            <div class="card" style="width: 18rem;">
-                    <img   [src]="product.payload.val().imageUrl" *ngIf="product.payload.val().imageUrl" class="card-img-top" >
+            <div class="card" style="width: 30rem;">
+                    <img   [src]="product.imageUrl" *ngIf="product.imageUrl" class="card-img-top" >
                     <div class="card-body">
-                      <h5 class="card-title">{{product.payload.val().title}}</h5>
-                      <p class="card-text">{{product.payload.val().imageUrl | currency:'USD':true}}</p>
+                      <h5 class="card-title">{{product.title}}</h5>
+                      <p class="card-text">{{product.price | currency:'USD':true}}</p>
                     </div>
                   </div>
     </div>

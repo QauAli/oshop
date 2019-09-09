@@ -14,6 +14,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$:Observable<any>;
   product={};
+  productId;
 
   constructor(
     private categoryService:CategoryService,
@@ -22,12 +23,13 @@ export class ProductFormComponent implements OnInit {
     private route:ActivatedRoute) {
     this.categories$ = this.categoryService.getCategories();
 
-    let productId = route.snapshot.paramMap.get('id');
-    this.productService.getProduct(productId).pipe(take(1)).subscribe(product=>{
-      this.product = product;
-      //console.log(product.payload.val());
-    });
-    
+    this.productId = route.snapshot.paramMap.get('id');
+    if(this.productId){
+      this.productService.getProduct(this.productId).pipe(take(1)).subscribe(product=>{
+        this.product = product.payload.val();
+        //console.log(this.product);
+      });
+    }
 
     // this.categories$.subscribe(actions => {
     //   actions.forEach(action => {
@@ -43,12 +45,22 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product){
-    //console.log(product);
-
-    this.productService.create(product);
+    console.log(product);
+    
+    if(this.productId)
+      this.productService.update(this.productId, product);
+    else
+      this.productService.create(product);
+    
     this.router.navigate(['/admin/products']);
-
-
   }
+
+  delete(){
+    if(!confirm('Are you shure to delete this product!')) return;
+
+    this.productService.delete(this.productId);
+    this.router.navigate(['/admin/products']);
+  }
+
 
 }
