@@ -8,17 +8,16 @@ export class ProductService {
 
   constructor(private db:AngularFireDatabase) { }
 
-
-
-
   create(product){
-
     return this.db.list('/products').push(product);
-
   }
 
   getProducts(){
     return this.db.list('/products').snapshotChanges();
+  }
+
+  getCategoryProducts(category){
+    return this.db.list('/products/'+category).snapshotChanges();
   }
 
   getProduct(id){

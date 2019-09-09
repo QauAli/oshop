@@ -15,7 +15,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 
 
 const routes: Routes = [
-  {path:'', component:HomeComponent},
+  {path:'', component:ProductsComponent},  //HomeComponent is reserved for featured products.
   {path:'login',component:LoginComponent},
   {path:'products',component:ProductsComponent},
   {path:'shopping-cart', component:ShoppingCartComponent},

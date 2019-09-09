@@ -14,7 +14,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   subscription: Subscription;    // to unsubscribe.
 
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject = new Subject();   // We use this trigger because fetching the list of persons can be quite long, thus we ensure the data is fetched before rendering
+  dtTrigger = new Subject();   // We use this trigger because fetching the list of persons can be quite long, thus we ensure the data is fetched before rendering
 
   constructor(private productService: ProductService) {
   }
