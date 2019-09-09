@@ -13,16 +13,18 @@ export class AppComponent {
   constructor(private afAuth:AuthService, private router:Router, private userService:UserService){
 
     afAuth.user$.subscribe(user=>{
-      if(user){
+      if(!user)
+        return ;
 
-        //console.log(user);
         userService.save(user);
-
-        userService.get(user.uid);
-
         let returnUrl = localStorage.getItem('returnUrl');
+
+        if(!returnUrl)
+          return;
+
+        localStorage.removeItem('returnUrl');
         router.navigateByUrl(returnUrl);
-      }
+      
     })
   }
 
