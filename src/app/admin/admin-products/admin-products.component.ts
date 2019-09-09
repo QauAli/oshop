@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { ProductService } from './../../product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -8,56 +8,41 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
- 
 
-  productsSnapshot:any[];
-  //filteredProducts:any[];
-  
-  filteredProducts=[];
-  products=[];
+  productsSnapshot: any[];      //response of firebase.
+  products = [];                //reponse to product mapping.
+  subscription: Subscription;    // to unsubscribe.
 
-  subscription:Subscription;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject = new Subject();   // We use this trigger because fetching the list of persons can be quite long, thus we ensure the data is fetched before rendering
 
-  constructor(private productService:ProductService) {
-    this.subscription = this.productService.getProducts().subscribe(products=>{
-      this.productsSnapshot=this.filteredProducts=products;
-      //console.log(this.products);
-
-      
-
-      this.productsSnapshot.forEach(product=>{
-        this.products.push( 
-          {key:product.payload.key,
-           title:product.payload.val().title,
-           imageUrl:product.payload.val().imageUrl,
-           price:product.payload.val().price,
-           category:product.payload.val().category
-            });
-            this.filteredProducts = this.products;
+  constructor(private productService: ProductService) {
+  }
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2
+    };
+    
+    this.subscription = this.productService.getProducts().subscribe(products => {
+      this.productsSnapshot = products;
+      this.productsSnapshot.forEach(product => {
+        this.products.push(
+          {
+            key: product.payload.key,
+            title: product.payload.val().title,
+            imageUrl: product.payload.val().imageUrl,
+            price: product.payload.val().price,
+            category: product.payload.val().category
+          });
       })
-
-      //console.log(this.filteredProducts);
-
+      this.dtTrigger.next();
     });
-   }
-
-  
-
-
-  filter(query:string){
-    //console.log(query);
-
-    this.filteredProducts = (query)? this.products.filter(p=>p.title.toLowerCase().includes(query.toLowerCase())):this.products;
-    //console.log(this.filteredProducts);
-
-
-
   }
 
-  ngOnInit() {
-  }
   ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
     this.subscription.unsubscribe();
   }
-
 }

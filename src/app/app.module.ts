@@ -29,6 +29,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CustomFormsModule } from 'ng2-validation';
     AngularFireDatabaseModule,
     AppRoutingModule,
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    DataTablesModule
   ],
   providers: [ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],
