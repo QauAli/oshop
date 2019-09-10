@@ -12,50 +12,38 @@ import { Observable, Subscription, Subject } from 'rxjs';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   
-  productsSnapshot: any[];      //response of firebase.
   products = [];                //reponse to product mapping.
   subscription: Subscription;    // to unsubscribe.
   filteredProducts=[];
 
-  categories$;
-  activeCategory;
+  category;
 
   constructor(private productService:ProductService,
-    private categoryService:CategoryService,
     private activatedRoute:ActivatedRoute) { 
 
     }
 
   ngOnInit() {
     this.subscription = this.productService.getProducts().subscribe(products => {
-      this.productsSnapshot = products;
-      this.productsSnapshot.forEach(product => {
+      products.forEach(product => {
         this.products.push(
           {
             key: product.payload.key,
-            title: product.payload.val().title,
-            imageUrl: product.payload.val().imageUrl,
-            price: product.payload.val().price,
-            category: product.payload.val().category
+            ...product.payload.val()
           });
       })
       this.filteredProducts = this.products;
 
       this.activatedRoute.queryParamMap.subscribe(params=>{
-        this.activeCategory = params.get('category');
+        this.category = params.get('category');
   
-        this.filteredProducts = (this.activeCategory)?this.products.filter(p=>p.category===this.activeCategory)
+        this.filteredProducts = (this.category)?this.products.filter(p=>p.category===this.category)
         :this.products;
   
       });
 
     });
-
- 
-    this.categories$ = this.categoryService.getCategories();
-
   
-
   }
 
   ngOnDestroy(): void {

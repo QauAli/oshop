@@ -49,13 +49,7 @@
                 
                 </form>
     </div>
-    <div class="col-md-6">
-            <div class="card" style="width: 30rem;" *ngIf="product.title">
-                    <img  [src]="product.imageUrl" *ngIf="product.imageUrl" class="card-img-top" >
-                    <div class="card-body">
-                      <h5 class="card-title">{{product.title}}</h5>
-                      <p class="card-text">{{product.price | currency:'USD':true}}</p>
-                    </div>
-                  </div>
+    <div class="col-md-6" style="width: 30rem;">
+        <product-card [show-actions]="false" [product]="product"></product-card>
     </div>
 </div>
