@@ -1,17 +1,17 @@
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { AppUser } from './models/app-user';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  appUser$:AppUser;
+  appUser:AppUser;
 
   // constructor(private db: AngularFirestore) {
 
@@ -40,12 +40,14 @@ export class UserService {
 
   constructor(private db: AngularFireDatabase, public authService: AuthService) {
 
-    authService.user$.subscribe(user => {
-      this.get(user.uid).subscribe(u => {
-        this.appUser$ = u;
-        // console.log(appUser.payload.val());
-      })
-    });
+    this.authService.user$.pipe(switchMap(user =>{
+      if(user)
+        return this.get(user.uid).valueChanges();
+
+        return of(null);
+    }),map(u=>{
+      return u;
+    })).subscribe(appUser=>this.appUser = appUser);
   }
 
   save(user: firebase.User) {
@@ -56,12 +58,7 @@ export class UserService {
     );
   }
 
-  get(uid: string) {
-    return this.db.object<AppUser>('/users/' + uid).snapshotChanges().pipe(map(user => {
-      return {
-        key: uid,
-        ...user.payload.val()
-      }
-    }));
+  get(uid: string):AngularFireObject<AppUser>{
+    return this.db.object('/users/' + uid);
   }
 }
