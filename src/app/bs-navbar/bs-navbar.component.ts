@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class BsNavbarComponent {
 
-  constructor(public authService:AuthService, private userService:UserService) {   
+  constructor(public authService:AuthService, public userService:UserService) {   
   }
 
   logout(){
