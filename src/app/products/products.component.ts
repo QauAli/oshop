@@ -40,18 +40,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
           });
       })
       this.filteredProducts = this.products;
+
+      this.activatedRoute.queryParamMap.subscribe(params=>{
+        this.activeCategory = params.get('category');
+  
+        this.filteredProducts = (this.activeCategory)?this.products.filter(p=>p.category===this.activeCategory)
+        :this.products;
+  
+      });
+
     });
 
  
     this.categories$ = this.categoryService.getCategories();
 
-    this.activatedRoute.queryParamMap.subscribe(params=>{
-      this.activeCategory = params.get('category');
-
-      this.filteredProducts = (this.activeCategory)?this.products.filter(p=>p.category===this.activeCategory)
-      :this.products;
-
-    });
+  
 
   }
 

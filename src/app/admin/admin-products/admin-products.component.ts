@@ -21,7 +21,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
     
     this.subscription = this.productService.getProducts().subscribe(products => {

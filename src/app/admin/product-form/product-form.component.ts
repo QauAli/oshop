@@ -1,3 +1,4 @@
+import { Product } from './../../models/product';
 
 import { ProductService } from './../../product.service';
 import { Observable } from 'rxjs';
@@ -14,7 +15,7 @@ import { take } from 'rxjs/operators';
 export class ProductFormComponent implements OnInit {
 
   categories$:Observable<any>;
-  product={};
+  product : Product;
   productId;
 
   constructor(
@@ -22,12 +23,21 @@ export class ProductFormComponent implements OnInit {
     private productService:ProductService,
     private router:Router,
     private route:ActivatedRoute) {
+
+      this.product = {
+        title:"",
+        imageUrl:"",
+        price:"",
+        key:"",
+        category:""
+      }
+
     this.categories$ = this.categoryService.getCategories();
 
     this.productId = route.snapshot.paramMap.get('id');
     if(this.productId){
       this.productService.getProduct(this.productId).pipe(take(1)).subscribe(product=>{
-        this.product = product.payload.val();
+        this.product = product;
         //console.log(this.product);
       });
     }
