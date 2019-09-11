@@ -7,7 +7,7 @@
     </div>
     <div class="col">
         <div style=" display: flex; flex-wrap: wrap;">
-            <product-card [show-actions]="true" [product]="product" *ngFor="let product of filteredProducts" style=" margin: 10px; width: 12rem;"></product-card>
+            <product-card  [shopping-cart]="shoppingCart" [show-actions]="true" [product]="product" *ngFor="let product of filteredProducts" style=" margin: 10px; width: 12rem;"></product-card>
         </div>
     </div>
 </div>

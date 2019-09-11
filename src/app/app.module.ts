@@ -32,6 +32,7 @@ import { CustomFormsModule } from 'ng2-validation';
 import { DataTablesModule } from 'angular-datatables';
 import { CategoryPanelComponent } from './products/category-panel/category-panel.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
     CustomFormsModule,
     DataTablesModule
   ],
-  providers: [ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
+  providers: [ShoppingCartService, ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],
   exports: [BsNavbarComponent, HomeComponent, ProductsComponent, ShoppingCartComponent, CheckOutComponent, OrderSuccessComponent]
 })
