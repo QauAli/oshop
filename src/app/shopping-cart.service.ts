@@ -40,11 +40,19 @@ export class ShoppingCartService implements OnInit{
     return cartId;
   }
 
+  async removeFromCart(product:Product){
+    this.updateItemQuantity(product, -1); //no await because we dont need result value otherwise you can use await also
+  }
+
   async addToCart(product:Product){
+    this.updateItemQuantity(product,1);//no await because we dont need result value otherwise you can use await also
+}
+
+  async updateItemQuantity(product:Product, change:number){
+
     let cartId = await this.CreateOrUpdateCart();
     let item$ = this.getItem(cartId, product.key);
     let item$$ = this.getItem(cartId, product.key);
-
     item$.valueChanges().pipe(take(1),map(i=>{
       let realItem:Item = i;
       return realItem;
@@ -52,21 +60,19 @@ export class ShoppingCartService implements OnInit{
       if(!item){
         item$$.update({
           product:product,
-          quantity: 0
+          quantity: 1
         })
       }else{
         item$$.update({
           product:product,
-          quantity: item.quantity +1
+          quantity: item.quantity + change
         })
       }
      
     })
 
-
-
-
-
   }
+
+
 
 }
