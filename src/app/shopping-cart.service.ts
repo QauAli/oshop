@@ -24,7 +24,7 @@ export class ShoppingCartService implements OnInit{
 
   async getcart(){
     let cartId = await this.CreateOrUpdateCart();
-    return this.db.object<ShoppingCart>('/shopping-carts/'+cartId).valueChanges().pipe(map(cart=>new ShoppingCart(cart.items)));
+    return this.db.object<{ [key: string]: Item; }>('/shopping-carts/'+cartId).valueChanges().pipe(map(cart=>new ShoppingCart(cart)));
   }
 
   private getItem(cartId, productId){
