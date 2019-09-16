@@ -34,6 +34,7 @@ import { CategoryPanelComponent } from './products/category-panel/category-panel
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     CustomFormsModule,
     DataTablesModule
   ],
-  providers: [ShoppingCartService, ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
+  providers: [OrderService, ShoppingCartService, ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],
   exports: [BsNavbarComponent, HomeComponent, ProductsComponent, ShoppingCartComponent, CheckOutComponent, OrderSuccessComponent]
 })

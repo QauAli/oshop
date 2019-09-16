@@ -25,7 +25,7 @@ export class ShoppingCart{
             return 0;
 
         let item = this.shoppingCartObject.items[product.key];
-        console.log(item);
+        //console.log(item);
 
         return item?item.quantity:0;
     }

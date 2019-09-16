@@ -18,6 +18,8 @@ export class AppComponent implements OnInit{
 
         this.userService.save(user);
         let returnUrl = localStorage.getItem('returnUrl');
+        localStorage.setItem('userId',user.uid);
+        console.log(user.uid);
 
         if(!returnUrl)
           return;
