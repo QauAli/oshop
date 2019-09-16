@@ -1,1 +1,44 @@
-<p>check-out works!</p>
+
+
+
+<div class="row">
+    <div class="col-6">
+            <form #f="ngForm" (ngSubmit)="save(f.value)"  >
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input ngModel #name="ngModel" required name="name" id="name" type="text" class="form-control">
+                        <div class="alert alert-danger" *ngIf="name.touched && name.invalid"> Name required! </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input #address="ngModel" required ngModel name="address" id="address" type="text" class="form-control">
+                        <div class="alert alert-danger" *ngIf="address.touched && address.invalid"> Address required! </div>
+                    </div>
+                    <div class="form-group"><label for="city">City</label>
+                        <input required #city="ngModel" ngModel name="city" id="city" type="text" class="form-control"></div>
+                        <div class="alert alert-danger" *ngIf="city.touched && city.invalid"> City required! </div>
+                    <button class="btn btn-primary">Done</button>
+                </form>
+    </div>
+    <div class="col-6">
+            <div class="card" style="width: 30rem;" *ngIf="cart$ | async as cart">
+                    <div class="card-body">
+                      <h5 class="card-title">Order Summary</h5>
+
+                      <ul class="list-group" >
+                          <li class="list-group-item" *ngFor="let item of cart.items">
+                              {{item.quantity}} x {{item.product.title}}
+                              <div class="float-right">{{item.product.price * item.quantity }} RS</div>
+                          </li>
+                          <li class="list-group-item font-weight-bold">
+                              Total
+                              <div class="float-right">{{cart.totalPrice }} RS</div>
+                            </li>
+                      </ul>
+
+                    </div>
+            </div>
+    </div>
+</div>
+
+

@@ -17,7 +17,7 @@ export class ShoppingCart{
             this.items.push(new Item(shoppingCartObject.items[item].product, shoppingCartObject.items[item].quantity));
         }
         //console.log(shoppingCartObject);
-        console.log(this.items);
+        //console.log(this.items);
     }
 
     public getItemQuantity(product:Product){
