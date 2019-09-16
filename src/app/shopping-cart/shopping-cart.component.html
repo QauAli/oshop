@@ -10,8 +10,8 @@
         <thead>
                 <tr>
                         <th>Title</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th class="text-center" style="width: 230px">Quantity</th>
+                        <th class="text-right">Price</th>
                     </tr>
         </thead>
 
@@ -19,7 +19,7 @@
                 <tr *ngFor="let item of cart.items">
                         <td>{{item.product.title}}</td>
                         <td> <product-quantity [product] = "item.product" [shopping-cart]="cart"  ></product-quantity> </td>
-                        <td>{{item.itemPrice}} Rs</td>
+                        <td class="text-right">{{item.itemPrice}} Rs</td>
                     </tr>
 
         </tbody>
@@ -28,7 +28,7 @@
             <tr>
                 <th></th>
                 <th></th>
-                <th>{{cart.totalPrice}} RS </th>
+                <th class="text-right">{{cart.totalPrice}} RS </th>
             </tr>
         </tfoot>
   

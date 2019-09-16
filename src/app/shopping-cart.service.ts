@@ -41,6 +41,11 @@ export class ShoppingCartService implements OnInit{
     return cartId;
   }
 
+
+  removeItem(cartId, productId){
+    return this.db.object<Item>('/shopping-carts/'+cartId+'/items/'+productId).remove();
+  }
+
   async removeFromCart(product:Product){
     this.updateItemQuantity(product, -1); //no await because we dont need result value otherwise you can use await also
   }
@@ -64,6 +69,10 @@ export class ShoppingCartService implements OnInit{
           quantity: 1
         })
       }else{
+        if( item.quantity == 1 && change == -1 ){
+          this.removeItem(cartId, product.key);
+          return;
+        }
         item$$.update({
           product:product,
           quantity: item.quantity + change
