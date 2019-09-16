@@ -19,7 +19,14 @@ export class BsNavbarComponent implements OnInit{
   quantity;
   
   
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  
   async ngOnInit(){
+
+    await this.delay(3000);
 
     this.cart$ = await this.shoppingCartService.getcart();
 

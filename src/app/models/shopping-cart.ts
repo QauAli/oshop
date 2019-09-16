@@ -9,6 +9,10 @@ export class ShoppingCart{
 
     constructor(public shoppingCartObject:{[key:string]:Item}){
 
+        if(!this.shoppingCartObject)
+            return;
+
+
         for(let item in shoppingCartObject.items){
             this.items.push(new Item(shoppingCartObject.items[item].product, shoppingCartObject.items[item].quantity));
         }
@@ -17,6 +21,8 @@ export class ShoppingCart{
     }
 
     public getItemQuantity(product:Product){
+        if(!this.shoppingCartObject || !this.shoppingCartObject.items)
+            return 0;
 
         let item = this.shoppingCartObject.items[product.key];
         console.log(item);

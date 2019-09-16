@@ -10,12 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+  
   cart$;
 
   constructor(public shoppingCartService:ShoppingCartService) { }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   async ngOnInit() {
 
+  await this.delay(3000);
   this.cart$ =  await this.shoppingCartService.getcart();
 
   }
