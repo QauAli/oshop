@@ -6,9 +6,10 @@
     <p>there are {{cart.quantity}} items in shopping cart</p>
 
 
-    <table class="table">
+    <table class="table" style="width: 80%">
         <thead>
                 <tr>
+                        <th>Image</th>
                         <th>Title</th>
                         <th class="text-center" style="width: 230px">Quantity</th>
                         <th class="text-right">Price</th>
@@ -17,15 +18,17 @@
 
         <tbody>
                 <tr *ngFor="let item of cart.items">
+                        <td> <img [src]="item.product.imageUrl" class="thumbnail"></td>
                         <td>{{item.product.title}}</td>
                         <td> <product-quantity [product] = "item.product" [shopping-cart]="cart"  ></product-quantity> </td>
                         <td class="text-right">{{item.itemPrice}} Rs</td>
-                    </tr>
+                </tr>
 
         </tbody>
 
         <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th class="text-right">{{cart.totalPrice}} RS </th>
@@ -34,6 +37,8 @@
   
         
     </table>
+
+    <button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Cart</button>
 
 
 </ng-container>
