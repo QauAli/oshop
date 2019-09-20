@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductService } from './product.service';
 import { CategoryService } from './category.service';
 import { UserService } from './user.service';
@@ -35,6 +36,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { OrderService } from './order.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatMenuModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -63,7 +67,15 @@ import { OrderService } from './order.service';
     AppRoutingModule,
     FormsModule,
     CustomFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatMenuModule
   ],
   providers: [OrderService, ShoppingCartService, ProductService ,CategoryService, AngularFirestore ,AuthService,AuthGaurdService, UserService],
   bootstrap: [AppComponent],

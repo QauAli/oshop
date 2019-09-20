@@ -1,4 +1,57 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+<div style="height: 80vh;">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Oshop</span>
+            <span class="menu-spacer"></span>
+            <div fxShow="true" fxHide.lt-md>
+                <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                <a routerLink="/" mat-button>Home</a>
+                <a routerLink="/shopping-cart" mat-button>Shopping-cart
+                    <span *ngIf="cart$ | async as cart " class="badge badge-warning badge-pill">{{cart.quantity}}</span>
+                </a>
+
+                <a *ngIf="userService.appUser && userService.appUser.isAdmin" routerLink="/admin/products"
+                    mat-button>Manage Products</a>
+                <a *ngIf="userService.appUser && userService.appUser.isAdmin" routerLink="/admin/orders"
+                    mat-button>Manage Orders</a>
+
+                <a *ngIf="!userService.appUser" routerLink="/login" mat-button>Login</a>
+
+                <a (click)="logout()" *ngIf="userService.appUser" mat-button>logout</a>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container fxFlexFill>
+        <mat-sidenav #sidenav>
+            <mat-nav-list>
+                <a href="/" mat-list-item>Home</a>
+                <a (click)="sidenav.toggle()" routerLink="/shopping-cart" mat-list-item>Shopping-cart
+                    <span *ngIf="cart$ | async as cart " class="badge badge-warning badge-pill">{{cart.quantity}}</span>
+                </a>
+
+                <a (click)="sidenav.toggle()" *ngIf="userService.appUser && userService.appUser.isAdmin"
+                    routerLink="/admin/products" mat-list-item>Manage Products</a>
+                <a (click)="sidenav.toggle()" *ngIf="userService.appUser && userService.appUser.isAdmin"
+                    routerLink="/admin/orders" mat-list-item>Manage Orders</a>
+
+                <a (click)="sidenav.toggle()" *ngIf="!userService.appUser" routerLink="/login" mat-list-item>Login</a>
+                <a (click)="logout()" *ngIf="userService.appUser" mat-list-item>Logout</a>
+                <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<!--
+<nav class="navbar navbar-expand-md navbar-light bg-light">
     <a class="navbar-brand" routerLink="/">Oshop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,3 +91,5 @@
         </ul>
     </div>
 </nav>
+
+-->
