@@ -1,49 +1,45 @@
+<div style="width: 60%; margin: auto">
+        <h1>Shopping Cart</h1>
 
-<h1>Shopping Cart</h1>
-
-<ng-container *ngIf="cart$ | async as cart"  >
-
-    <p>there are {{cart.quantity}} items in shopping cart</p>
-
-
-    <table class="table" style="width: 70%">
-        <thead>
-                <tr>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th class="text-center" style="width: 230px">Quantity</th>
-                        <th class="text-right">Price</th>
-                    </tr>
-        </thead>
-
-        <tbody>
-                <tr *ngFor="let item of cart.items">
-                        <td> <img [src]="item.product.imageUrl" class="thumbnail"></td>
-                        <td>{{item.product.title}}</td>
-                        <td> <product-quantity [product] = "item.product" [shopping-cart]="cart"  ></product-quantity> </td>
-                        <td class="text-right">{{item.itemPrice}} Rs</td>
-                </tr>
-
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <th><button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Cart</button></th>
-                <th></th>
-                <th></th>
-                <th class="text-right">{{cart.totalPrice}} RS </th>
-            </tr>
-        </tfoot>
-
+        <ng-container *ngIf="cart$ | async as cart"  >
         
-    </table>
-
-    
-    <a routerLink="/check-out"  style="color: white;" class="btn btn-primary">Checkout</a>
-
-</ng-container>
-
-
-
-
-
+            <p>There are {{cart.quantity}} items in shopping cart</p>
+        
+        
+            <table class="table">
+                <thead>
+                        <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th class="text-center" style="width: 230px">Quantity</th>
+                                <th class="text-right">Price</th>
+                            </tr>
+                </thead>
+        
+                <tbody>
+                        <tr *ngFor="let item of cart.items">
+                                <td> <img [src]="item.product.imageUrl" class="thumbnail"></td>
+                                <td>{{item.product.title}}</td>
+                                <td> <product-quantity [product] = "item.product" [shopping-cart]="cart"  ></product-quantity> </td>
+                                <td class="text-right">{{item.itemPrice}} Rs</td>
+                        </tr>
+        
+                </tbody>
+        
+                <tfoot>
+                    <tr>
+                        <th><button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Cart</button></th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-right">{{cart.totalPrice}} RS </th>
+                    </tr>
+                </tfoot>
+        
+                
+            </table>
+        
+            
+            <a routerLink="/check-out"  style="color: white;" class="btn btn-primary">Checkout</a>
+        
+        </ng-container>        
+</div>
